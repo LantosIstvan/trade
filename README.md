@@ -2,10 +2,6 @@
 
 ## Használat
 
-A gyökérkönyvtárban lévő `secret.properties.example` fájlról készíts egy másolatát `secret.properties` néven. Ebbe a fájlba kell beleírni az OANDA API kulcsaid. Ez a fájl nem jelenik meg git repóban, de a tartalma a végleges JAR fájl részét képezi majd, amely build-be a repó tulajdonosának kulcsai kerülnek majd.
-
-## Build elkészítése
-
 ```sh
 Maven -> trade -> Lifecycle -> clean
 Maven -> trade -> Lifecycle -> install
@@ -95,38 +91,3 @@ git push
 Ezzel a `master` ág nem változik, csak a te saját ágad frissül a GitHub-on.
 
 A repótulajdonos beemeli a kódot a `master` ágba, nincs szükség Merge Request létrehozására.
-
-### Git Merge Meld-el
-
-A [Meld](https://gnome.pages.gitlab.gnome.org/meld/) egy kiváló cross-platform program, amelyet be lehet állítani `git difftool` vagy `git mergetool`-nak is.
-
-Telepítsétek fel a fenti linkről, majd adjátok hozzá a környezeti változókhoz (Path).
-
-```sh
-# Meld beállítása difftool-ként (összehasonlító eszköz):
-git config --global diff.tool meld
-
-# Meld beállítása mergetool-ként (egyesítő eszköz):
-git config --global merge.tool meld
-```
-
-Alapértelmezetten a `git difftool` és `git mergetool` minden fájlnál rákérdez, hogy elindítsa-e az eszközt. Ezt kikapcsolhatod a kényelem érdekében, de **erősen javasolt bekapcsolva hagyni**:
-
-```sh
-git config --global difftool.prompt false
-git config --global mergetool.prompt false
-```
-
-#### Fájlonkénti összehasonlítás Meld-el:
-
-```sh
-git difftool master..istvan
-git difftool master..gyorgyi
-```
-
-#### Könyvtárszintű összehasonlítás Meld-el (ajánlott):
-
-```sh
-git difftool -d master istvan
-git difftool -d master gyorgyi
-```
