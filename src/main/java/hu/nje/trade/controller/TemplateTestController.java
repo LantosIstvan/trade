@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TemplateTestController {
     @GetMapping("/template-test")
     public String templateTest(Model model) {
-        model.addAttribute("pageTitle", "Template Test");
-        return "layouts/default_layout";
+        model.addAttribute("pageTitle", "A new model for <br> open collaboration");
+        return "fooldal";
     }
 }
