@@ -78,10 +78,7 @@ const navbarDarkenOnScroll = () => {
 
     const allColors = { ...colors, ...grays };
     let colorName = getData(navbar, "navbar-darken-on-scroll");
-
-    // JAVÍTVA: Az alapértelmezett szín "dark" helyett "light".
     colorName = allColors[colorName] ? colorName : "light";
-
     const colorRgb = hexToRgb(allColors[colorName]);
     const borderColorRgb = hexToRgb(grays[300]);
     const originalBgImage = window.getComputedStyle(navbar).backgroundImage;
