@@ -1,11 +1,10 @@
 <th:block th:fragment="header" xmlns:th="http://www.thymeleaf.org">
 
     <nav class="navbar navbar-expand-xl navbar-light sticky-top px-0 pb-0 mb-2" id="navbar" data-navbar-darken-on-scroll="white">
-        <!--/* <div class="container-fluid align-items-center py-2"> */-->
         <div class="container-xxl align-items-center py-2">
-            <a class="navbar-brand flex-center" th:href="@{/}">
-                <img class="logo" th:src="@{/images/logo.png}" th:alt="#{app.title}" />
-                <span th:text="#{app.title}" class="ms-2 d-none d-sm-block fw-bold">.</span>
+            <a th:href="@{/}" class="navbar-brand flex-center">
+                <img th:src="@{/images/logo.png}" th:alt="#{app.title}" class="logo" />
+                <span th:text="#{app.title}" class="ms-2 d-none d-sm-block fw-bold"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
