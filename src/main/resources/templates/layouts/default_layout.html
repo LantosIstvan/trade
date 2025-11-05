@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html lang="hu" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title th:text="#{app.title}">.</title>
-    <!--/* Nem interpretált komment */-->
-    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" th:href="@{/css/theme.css}">
-    <link rel="stylesheet" th:href="@{/vendors/swiper/swiper-bundle.min.css}">
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-</head>
-<body data-bs-spy="scroll" data-bs-target="#navbar">
-    <main class="main" id="top">
-        <nav th:replace="fragments/header :: header"></nav>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="layout(pageTitle, content)">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title th:text="${pageTitle} + ' | ' + #{app.title}">.</title>
+        <!--/* Nem interpretált komment */-->
+        <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" th:href="@{/css/theme.css}">
+        <link rel="stylesheet" th:href="@{/vendors/swiper/swiper-bundle.min.css}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#navbar">
+        <main class="main" id="top">
+            <nav th:replace="fragments/header :: header"></nav>
 
-        <th:block th:replace="${content}"></th:block>
+            <th:block th:replace="${content}"></th:block>
 
-        <th:block th:replace="fragments/footer :: footer"></th:block>
-    </main>
-    <script th:src="@{/vendors/popperjs/popper.min.js}"></script>
-    <script th:src="@{/vendors/bootstrap/bootstrap.min.js}"></script>
-    <script th:src="@{/vendors/is/is.min.js}"></script>
-    <script th:src="@{/vendors/swiper/swiper-bundle.min.js}"></script>
-    <script th:src="@{/js/theme.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-</body>
+            <th:block th:replace="fragments/footer :: footer"></th:block>
+        </main>
+        <!--/* <script th:src="@{/vendors/popperjs/popper.min.js}"></script> */-->
+        <script th:src="@{/vendors/bootstrap/bootstrap.min.js}"></script>
+        <!--/* <script th:src="@{/vendors/is/is.min.js}"></script> */-->
+        <script th:src="@{/vendors/swiper/swiper-bundle.min.js}"></script>
+        <script th:src="@{/js/theme.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
+    </body>
+</th:block>
 </html>

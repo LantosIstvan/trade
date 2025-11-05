@@ -5,10 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TemplateTestController {
-    @GetMapping("/template-test")
+public class FooldalController {
+    @GetMapping("/")
     public String templateTest(Model model) {
-        model.addAttribute("pageTitle", "A new model for <br> open collaboration");
+        model.addAttribute("pageTitle", "Főoldal");
+        model.addAttribute("welcomeMessage", "A new model for open collaboration");
         return "fooldal";
     }
 }

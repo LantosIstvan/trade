@@ -17,8 +17,8 @@ import com.oanda.v20.primitives.InstrumentName;
 public class Config {
     private Config() {} // Ne legyen példányosítható
 
-    public static final String URL = "<< URL >>";
-    public static final String TOKEN = "<< TOKEN >>";
-    public static final AccountID ACCOUNTID = new AccountID("<< ACCOUNTID >>");
+    public static final String URL = "https://api-fxpractice.oanda.com";
+    public static final String TOKEN = "aed1690233ddcef16f05d573ad5f2e73-fd2e516429d8ac1a7efc867a3490fe68";
+    public static final AccountID ACCOUNTID = new AccountID("101-004-37392287-001");
     // public static final InstrumentName INSTRUMENT  = new InstrumentName("<< INSTRUMENT >>");
 }
