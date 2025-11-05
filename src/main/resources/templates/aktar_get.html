@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body><!-- A gyökér elem lecserélődik, ezért ami itt van, az lényegtelen, de a tartalomnak valahol lennie kell. -->
+<th:block th:fragment="content">
+
+    <section>
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <h1>AktÁr GET</h1>
+                <form action="#" th:action="@{/forex-aktar}" th:object="${par}" method="post">
+                    <select name="instruments" th:field="*{instrument}">
+                        <option value="EUR_USD">EUR_USD</option>
+                        <option value="USD_CHF">USD_CHF</option>
+                        <option value="GBP_USD">GBP_USD</option>
+                        <option value="USD_JPY">USD_JPY</option>
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>

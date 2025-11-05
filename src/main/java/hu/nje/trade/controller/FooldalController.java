@@ -14,7 +14,7 @@ public class FooldalController {
     }
 
     @GetMapping("/")
-    public String templateTest(Model model) {
+    public String getFooldal(Model model) {
         // Oanda ctx használható itt, más menüpontokban lehet hasznos
         model.addAttribute("pageTitle", "Főoldal");
         model.addAttribute("welcomeMessage", "A new model for open collaboration");

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body>
+<th:block th:fragment="content">
+
+    <section>
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <h1>AktÁr POST</h1>
+                <p th:text="'Instrument: ' + ${instr}"/>
+                <p th:text="'Actual price: ' + ${price}"/>
+                <a th:href="@{'/forex-aktar'}">Select another instrument</a>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>
