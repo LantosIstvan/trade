@@ -1,12 +1,19 @@
 # Java előadás beadandó
 
-## Használat
+## Használat (fejlesztéskor)
 
 ```sh
 Maven -> trade -> Lifecycle -> clean
 Maven -> trade -> Lifecycle -> install
 Maven -> trade -> Lifecycle -> package
-java -jar target/trade-0.0.1-SNAPSHOT.jar
+```
+
+## Használat (feladat leadás után)
+
+A JAR állományt a gyökérkönyvtárból kell futtatni:
+
+```sh
+java -jar ./beadando.jar
 ```
 
 ----

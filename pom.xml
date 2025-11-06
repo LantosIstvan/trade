@@ -69,10 +69,15 @@
     </dependencies>
 
     <build>
+        <finalName>beadando</finalName><!-- Feladatkiírás szerinti JAR állomány neve -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- Feladatkiírás szerinti JAR állomány helye -->
+                <!-- <configuration>
+                    <outputDirectory>${project.basedir}</outputDirectory>
+                </configuration> -->
             </plugin>
 
             <plugin>
