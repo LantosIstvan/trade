@@ -6,6 +6,7 @@ import com.oanda.v20.instrument.InstrumentCandlesRequest;
 import com.oanda.v20.instrument.InstrumentCandlesResponse;
 import com.oanda.v20.primitives.InstrumentName;
 import hu.nje.trade.Utils;
+import hu.nje.trade.dto.CandleDataDTO;
 import hu.nje.trade.dto.HistArDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.oanda.v20.instrument.CandlestickGranularity.*;
 
@@ -39,7 +39,8 @@ public class HistArController {
 
     @PostMapping("/forex-histar")
     public String postHistAr(@ModelAttribute HistArDTO histArDTO, Model model) {
-        StringBuilder strOut;
+        // Listát használunk, ami DTO-kat tárol
+        List<CandleDataDTO> pricesList = new ArrayList<>();
 
         try {
             InstrumentCandlesRequest request = new InstrumentCandlesRequest(new InstrumentName(histArDTO.getInstrument()));
@@ -56,19 +57,21 @@ public class HistArController {
 
             request.setCount(10L); // utolsó 10 árat kérjünk
             InstrumentCandlesResponse resp = ctx.instrument.candles(request);
-            strOut = new StringBuilder();
-            for (Candlestick candle : resp.getCandles())
-                strOut.append(candle.getTime()).append("\t").append(candle.getMid().getC()).append(";");
+            // System.out.printf("resp: %s%n", Utils.jsonPrettify(resp));
 
-            // Időbélyeg kinyerése és formázása olvasható formátumra
-
-            System.out.printf("resp: %s%n", Utils.jsonPrettify(resp));
+            // A válaszban kapott gyertyákon végigmegyünk,
+            // majd létrehozunk egy új DTO-t és hozzáadjuk a listához
+            for (Candlestick candle : resp.getCandles()) {
+                String formattedTime = Utils.formatTimestamp(candle.getTime());
+                String price = candle.getMid().getC().toString();
+                pricesList.add(new CandleDataDTO(formattedTime, price));
+            }
 
             model.addAttribute("instrument", histArDTO.getInstrument());
             model.addAttribute("granularity", histArDTO.getGranularity());
-            model.addAttribute("price", strOut.toString());
+            model.addAttribute("prices", pricesList);
         } catch (Exception e) {
-            model.addAttribute("error", "Hiba történt az OANDA API lekérés során.");
+            model.addAttribute("error", "Hiba történt az OANDA API lekérése során.");
             e.printStackTrace();
         }
 

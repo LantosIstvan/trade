@@ -31,20 +31,25 @@
                                 <h4 class="alert-heading">Hiba!</h4>
                                 <p class="mb-0" th:text="${error}"></p>
                             </div>
-                            <!--/* Árfolyam adatok megjelenítése, ha nincs hiba */-->
+                            <!--/* Adatok megjelenítése, ha nincs hiba */-->
                             <div th:unless="${error}">
                                 <h3 class="card-title text-primary" th:text="${instrument}"></h3>
-                                <!--/* <p class="card-text text-muted mb-4" th:text="'Lekérdezés időpontja: ' + ${timestamp}"></p> */-->
-                                <ul class="list-group list-group-flush">
+                                <ul class="list-group list-group-flush mb-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center fs-5">
                                         Részletesség
-                                        <span class="badge bg-danger rounded-pill px-3 py-2" th:text="${granularity}"></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center fs-5">
-                                        Előző árfolyamok
-                                        <span class="badge bg-success rounded-pill px-3 py-2" th:text="${price}"></span>
+                                        <span class="badge bg-info rounded-pill px-3 py-2" th:text="${granularity}"></span>
                                     </li>
                                 </ul>
+                                <!--/* Árfolyamok listájának megjelenítése */-->
+                                <h4 class="mt-4">Előző 10 árfolyam</h4>
+                                <div class="list-group">
+                                    <!--/* A 'th:each' segítségével végigiterálunk a 'prices' listán */-->
+                                    <div th:each="item : ${prices}" class="list-group-item d-flex justify-content-between align-items-center">
+                                        <!--/* Minden 'item' egy CandleDataDTO objektum lesz */-->
+                                        <span class="text-start" th:text="${item.formattedTime}"></span>
+                                        <span class="badge bg-dark rounded-pill fs-6" th:text="${item.price}"></span>
+                                    </div>
+                                </div>
                             </div>
                             <a th:href="@{/forex-histar}" class="btn btn-primary btn-lg mt-4 w-100">Új lekérdezés</a>
                         </div>

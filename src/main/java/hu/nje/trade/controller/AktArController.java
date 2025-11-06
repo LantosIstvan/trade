@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +64,7 @@ public class AktArController {
             model.addAttribute("timestamp", formattedTime);
         } catch (Exception e) {
             // System.err.println("A dobott kivétel valódi típusa: " + e.getClass().getName());
-            model.addAttribute("error", "Hiba történt az OANDA API lekérés során.");
+            model.addAttribute("error", "Hiba történt az OANDA API lekérése során.");
             e.printStackTrace();
         }
 
