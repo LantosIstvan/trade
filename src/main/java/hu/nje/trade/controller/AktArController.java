@@ -5,7 +5,6 @@ import com.oanda.v20.pricing.ClientPrice;
 import com.oanda.v20.pricing.PricingGetRequest;
 import com.oanda.v20.pricing.PricingGetResponse;
 import hu.nje.trade.Config;
-import hu.nje.trade.Utils;
 import hu.nje.trade.dto.AktArDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +32,7 @@ public class AktArController {
 
         String title = "Forex-AktÁr menü";
         model.addAttribute("pageTitle", title);
-        model.addAttribute("welcomeMessage", title);
+        model.addAttribute("heroMessage", title);
         return "aktar_get";
     }
 
@@ -75,7 +74,7 @@ public class AktArController {
 
         String title = "Forex-AktÁr menü | Eredmény";
         model.addAttribute("pageTitle", title);
-        model.addAttribute("welcomeMessage", title);
+        model.addAttribute("heroMessage", title);
         return "aktar_post";
     }
 }

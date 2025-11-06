@@ -18,7 +18,7 @@ public class FooldalController {
         // Oanda ctx használható itt, más menüpontokban lehet hasznos
 
         model.addAttribute("pageTitle", "Főoldal");
-        model.addAttribute("welcomeMessage", "A new model for open collaboration");
+        model.addAttribute("heroMessage", "A new model for open collaboration");
         return "fooldal";
     }
 }
