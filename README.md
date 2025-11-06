@@ -2,7 +2,7 @@
 
 ## Használat (fejlesztéskor)
 
-```sh
+```text
 Maven -> trade -> Lifecycle -> clean
 Maven -> trade -> Lifecycle -> install
 Maven -> trade -> Lifecycle -> package
@@ -33,7 +33,7 @@ Ha még nincs meg a gépeden a projekt, először klónoznod kell a GitHub repos
 3.  Másold ki a **"Clone with HTTPS"** linket.
 4.  Nyiss egy terminált (parancssort) a gépeden, navigálj abba a mappába, ahova a projektet szeretnéd letölteni, és futtasd a következő parancsot:
 
-```sh
+```text
 git clone https://github.com/LantosIstvan/trade.git
 ```
 
@@ -46,9 +46,6 @@ Ezzel létrejön a gépeden egy `LogbookApp` mappa a projekt teljes tartalmával
 Válts át a saját branch-edre:
 
 ```sh
-# https://github.com/LantosIstvan
-git checkout istvan
-# https://github.com/Fityulane
 git checkout gyorgyi
 ```
 

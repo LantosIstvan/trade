@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body>
+<th:block th:fragment="content">
+
+    <section class="pt-8 py-lg-0" id="hero" style="background-color:#e9f2e9;">
+        <div class="container-xxl">
+            <div class="row align-items-center min-vh-lg-50">
+                <div class="col-lg order-lg-1 text-center">
+                    <img class="img-fluid" th:src="@{/images/illustrations/hero-histar.png}" alt="" />
+                </div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 th:text="${heroMessage}" class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5">
+        <div class="container-xxl">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <h2 class="text-center mb-4">Válaszd ki a devizapárt és mennyiséget pozíció nyitáshoz</h2>
+                    <form action="#" th:action="@{/forex-nyit}" th:object="${param}" method="post">
+                        <div class="mb-3">
+                            <label for="instrumentSelect" class="form-label">Válassz devizapárt:</label>
+                            <select id="instrumentSelect" class="form-select form-select-lg" name="instruments" th:field="*{instrument}">
+                                <option value="EUR_USD">EUR_USD</option>
+                                <option value="USD_CHF">USD_CHF</option>
+                                <option value="GBP_USD">GBP_USD</option>
+                                <option value="USD_JPY">USD_JPY</option>
+                                <option value="EUR_HUF">EUR_HUF</option>
+                                <option value="USD_HUF">USD_HUF</option>
+                                <option value="PLN_HUF">PLN_HUF (hibakezelés miatt)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantityInputGroup" class="form-label">Válassz mennyiséget:</label>
+                            <div class="input-group input-group-lg">
+                                <button class="btn btn-outline-secondary" type="button"
+                                        onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" id="quantityInputGroup" class="form-control text-center no-spinner"
+                                       name="units" min="-100" max="100" th:field="*{units}">
+                                <button class="btn btn-outline-secondary" type="button"
+                                        onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <input type="submit" value="Pozíció nyitás" class="btn btn-primary btn-lg">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>
