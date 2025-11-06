@@ -1,6 +1,6 @@
 "use strict";
 
-// Eseményfigyelőt ad hozzá az ablak átméretezéséhez.
+// Eseményfigyelőt ad hozzá az ablak átméretezéséhez
 const resize = (callback) => window.addEventListener("resize", callback);
 
 // Egy stringet camelCase formátumúvá alakít (pl. "hello-world" -> "helloWorld").
@@ -9,7 +9,7 @@ const camelize = (str) => {
     return `${text.charAt(0).toLowerCase()}${text.slice(1)}`;
 };
 
-// Kiolvas egy data-* attribútumot egy HTML elemről, és megpróbálja JSON-ként értelmezni.
+// Kiolvas egy data-* attribútumot egy HTML elemről, és megpróbálja JSON-ként értelmezni
 const getData = (element, key) => {
     try {
         return JSON.parse(element.dataset[camelize(key)]);
@@ -18,7 +18,7 @@ const getData = (element, key) => {
     }
 };
 
-// Hexadecimális színkódot RGB tömbbé alakít.
+// Hexadecimális színkódot RGB tömbbé alakít
 const hexToRgb = (hex) => {
     let cleanHex = hex.startsWith("#") ? hex.substring(1) : hex;
     // Rövidített hex kód (pl. #F00) kiegészítése (#FF0000)
@@ -52,7 +52,7 @@ const breakpoints = {
     xxl: 1540
 };
 
-// Meghatározza egy Bootstrap navbar töréspontját az osztályai alapján.
+// Meghatározza egy Bootstrap navbar töréspontját az osztályai alapján
 const getBreakpoint = (navbar) => {
     const expandClass = [...navbar.classList].find(cls => cls.startsWith("navbar-expand-"));
     if (expandClass) {
@@ -67,7 +67,7 @@ const getBreakpoint = (navbar) => {
 // Fő funkciók
 // =======================================================================================
 
-// Dinamikus navbar, ami görgetésre megváltoztatja a kinézetét.
+// Dinamikus navbar, ami görgetésre megváltoztatja a kinézetét
 const navbarDarkenOnScroll = () => {
     const navbar = document.querySelector("[data-navbar-darken-on-scroll]");
     if (!navbar) return;
@@ -121,7 +121,7 @@ const navbarDarkenOnScroll = () => {
     });
 };
 
-// Rekurzívan összefésül több objektumot.
+// Rekurzívan összefésül több objektumot
 function deepMerge(target, ...sources) {
     for (const source of sources) {
         for (const key in source) {
@@ -134,34 +134,10 @@ function deepMerge(target, ...sources) {
     return target;
 }
 
-// Inicializálja a Swiper.js slidereket az oldalon.
-const swiperInit = () => {
-    document.querySelectorAll(".swiper-container").forEach(element => {
-        const userOptions = JSON.parse(element.dataset.option || '{}');
-
-        const defaultOptions = {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-                el: document.getElementById(element.dataset.paginationTarget),
-                type: "bullets",
-                clickable: true,
-            },
-            breakpoints: {
-                670: { slidesPerView: 2, spaceBetween: 20 },
-                1200: { slidesPerView: 3, spaceBetween: 50 },
-            },
-        };
-
-        new window.Swiper(element, deepMerge(defaultOptions, userOptions));
-    });
-};
-
 // =======================================================================================
 // Inicializálás
 // =======================================================================================
 
 window.addEventListener('DOMContentLoaded', () => {
-    swiperInit();
     navbarDarkenOnScroll();
 });

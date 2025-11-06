@@ -4,11 +4,11 @@
 <body><!-- A gyökér elem lecserélődik, ezért ami itt van, az lényegtelen, de a tartalomnak valahol lennie kell. -->
 <th:block th:fragment="content">
 
-    <section class="pt-8 py-lg-0" id="hero" style="background-color:#f3f0ea;">
+    <section class="pt-8 py-lg-0" id="hero" style="background-color:#e9f2e9;">
         <div class="container-xxl">
             <div class="row align-items-center min-vh-lg-50">
                 <div class="col-lg order-lg-1 text-center">
-                    <img class="img-fluid" th:src="@{/images/illustrations/hero-aktar.png}" alt="" />
+                    <img class="img-fluid" th:src="@{/images/illustrations/hero-histar.png}" alt="" />
                 </div>
                 <div class="col-lg mt-5 mt-lg-0">
                     <h1 th:text="${heroMessage}" class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12"></h1>
@@ -21,8 +21,8 @@
         <div class="container-xxl">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
-                    <h2 class="text-center mb-4">Aktuális árfolyam lekérdezése</h2>
-                    <form action="#" th:action="@{/forex-aktar}" th:object="${param}" method="post">
+                    <h2 class="text-center mb-4">Válaszd ki a devizapárt és részletességet a korábbi árak eléréséhez</h2>
+                    <form action="#" th:action="@{/forex-histar}" th:object="${param}" method="post">
                         <div class="mb-3">
                             <label for="instrumentSelect" class="form-label">Válassz devizapárt:</label>
                             <select id="instrumentSelect" class="form-select form-select-lg" name="instruments" th:field="*{instrument}">
@@ -33,6 +33,16 @@
                                 <option value="EUR_HUF">EUR <-> HUF</option>
                                 <option value="USD_HUF">USD <-> HUF</option>
                                 <option value="PLN_HUF">PLN <-> HUF (hibakezelés miatt)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="granularitySelect" class="form-label">Válassz részletességet:</label>
+                            <select id="granularitySelect" class="form-select form-select-lg" name="granularity" th:field="*{granularity}">
+                                <option value="M1">M1</option>
+                                <option value="H1">H1</option>
+                                <option value="D">D</option>
+                                <option value="W">W</option>
+                                <option value="M">M</option>
                             </select>
                         </div>
                         <div class="d-grid">

@@ -28,7 +28,7 @@ public class AktArController {
 
     @GetMapping("/forex-aktar")
     public String getAktAr(Model model) {
-        model.addAttribute("par", new AktArDTO());
+        model.addAttribute("param", new AktArDTO());
 
         String title = "Forex-AktÁr menü";
         model.addAttribute("pageTitle", title);
