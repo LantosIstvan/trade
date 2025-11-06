@@ -5,6 +5,7 @@ import com.oanda.v20.pricing.ClientPrice;
 import com.oanda.v20.pricing.PricingGetRequest;
 import com.oanda.v20.pricing.PricingGetResponse;
 import hu.nje.trade.Config;
+import hu.nje.trade.Utils;
 import hu.nje.trade.dto.AktArDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,10 +58,7 @@ public class AktArController {
             // System.out.printf("price.getBids(): %s%n", Utils.jsonPrettify(price.getBids()));
 
             // Időbélyeg kinyerése és formázása olvasható formátumra
-            Instant timeInstant = Instant.parse(price.getTime());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z")
-                .withZone(ZoneId.systemDefault());
-            String formattedTime = formatter.format(timeInstant);
+            String formattedTime = Utils.formatTimestamp(price.getTime());
 
             // Adatok átadása a modellnek
             model.addAttribute("instrument", price.getInstrument().toString());
@@ -68,7 +66,8 @@ public class AktArController {
             model.addAttribute("askPrice", bestAsk);
             model.addAttribute("timestamp", formattedTime);
         } catch (Exception e) {
-            model.addAttribute("error", "Hiba történt az adatok lekérdezése közben: " + e.getMessage());
+            // System.err.println("A dobott kivétel valódi típusa: " + e.getClass().getName());
+            model.addAttribute("error", "Hiba történt az OANDA API lekérés során.");
             e.printStackTrace();
         }
 

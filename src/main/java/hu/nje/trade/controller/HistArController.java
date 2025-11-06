@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 import static com.oanda.v20.instrument.CandlestickGranularity.*;
 
 @Controller
@@ -55,13 +59,18 @@ public class HistArController {
             strOut = new StringBuilder();
             for (Candlestick candle : resp.getCandles())
                 strOut.append(candle.getTime()).append("\t").append(candle.getMid().getC()).append(";");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-        model.addAttribute("instrument", histArDTO.getInstrument());
-        model.addAttribute("granularity", histArDTO.getGranularity());
-        model.addAttribute("price", strOut.toString());
+            // Időbélyeg kinyerése és formázása olvasható formátumra
+
+            System.out.printf("resp: %s%n", Utils.jsonPrettify(resp));
+
+            model.addAttribute("instrument", histArDTO.getInstrument());
+            model.addAttribute("granularity", histArDTO.getGranularity());
+            model.addAttribute("price", strOut.toString());
+        } catch (Exception e) {
+            model.addAttribute("error", "Hiba történt az OANDA API lekérés során.");
+            e.printStackTrace();
+        }
 
         String title = "Forex-HistÁr menü | Eredmény";
         model.addAttribute("pageTitle", title);
