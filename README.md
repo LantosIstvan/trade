@@ -37,7 +37,7 @@ Ha még nincs meg a gépeden a projekt, először klónoznod kell a GitHub repos
 git clone https://github.com/LantosIstvan/trade.git
 ```
 
-Ezzel létrejön a gépeden egy `LogbookApp` mappa a projekt teljes tartalmával.
+Ezzel létrejön a gépeden egy `trade` mappa a projekt teljes tartalmával.
 
 ### A Munkafolyamat Lépésről Lépésre
 
