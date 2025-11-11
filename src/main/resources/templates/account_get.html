@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body>
+<th:block th:fragment="content">
+
+    <section class="pt-8 py-lg-0" id="hero" style="background-color:#f5f5ff;">
+        <div class="container-xxl">
+            <div class="row align-items-center min-vh-lg-50">
+                <div class="col-lg order-lg-1 text-center">
+                    <img class="img-fluid" th:src="@{/images/illustrations/hero-nyit.png}" alt="" />
+                </div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 th:text="${heroMessage}" class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5">
+        <div class="container-xxl">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <!-- Hibaüzenet, ha a fiók adatai nem töltődtek be -->
+                    <div th:if="${accountSummary == null}" class="alert alert-danger" role="alert">
+                        A fiókadatok betöltése sikertelen volt. Kérjük, próbálja újra később.
+                    </div>
+
+                    <!-- Fiók adatok kártya, csak akkor jelenik meg, ha az adatok elérhetők -->
+                    <div th:if="${accountSummary != null}" class="card shadow-sm">
+                        <div class="card-header">
+                            <h5 class="mb-0">Fiók Részletei</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">Azonosító (ID)</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.id}"></dd>
+
+                                <dt class="col-sm-4">Alias</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.alias}"></dd>
+
+                                <dt class="col-sm-4">Deviza</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.currency}"></dd>
+
+                                <hr class="my-3">
+
+                                <dt class="col-sm-4">Egyenleg (Balance)</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.balance}"></dd>
+
+                                <dt class="col-sm-4">Tiszta Nyereség (NAV)</dt>
+                                <dd class="col-sm-8 fw-bold" th:text="${accountSummary.NAV}"></dd>
+
+                                <dt class="col-sm-4">Nyitott pozíciók P/L</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.unrealizedPL}"></dd>
+
+                                <dt class="col-sm-4">Realizált P/L</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.pl}"></dd>
+
+                                <hr class="my-3">
+
+                                <dt class="col-sm-4">Felhasznált letét (Margin Used)</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.marginUsed}"></dd>
+
+                                <dt class="col-sm-4">Elérhető letét (Margin Available)</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.marginAvailable}"></dd>
+
+                                <hr class="my-3">
+
+                                <dt class="col-sm-4">Nyitott kereskedések száma</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.openTradeCount}"></dd>
+
+                                <dt class="col-sm-4">Nyitott pozíciók száma</dt>
+                                <dd class="col-sm-8" th:text="${accountSummary.openPositionCount}"></dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>
