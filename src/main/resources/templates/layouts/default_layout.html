@@ -12,11 +12,11 @@
     </head>
     <body data-bs-spy="scroll" data-bs-target="#navbar">
         <main class="main" id="top">
-            <nav th:replace="fragments/header :: header"></nav>
+            <nav th:replace="~{fragments/header :: header}"></nav>
 
             <th:block th:replace="${content}"></th:block>
 
-            <th:block th:replace="fragments/footer :: footer"></th:block>
+            <th:block th:replace="~{fragments/footer :: footer}"></th:block>
         </main>
         <script th:src="@{/vendors/popperjs/popper.min.js}"></script>
         <script th:src="@{/vendors/bootstrap/bootstrap.min.js}"></script>
