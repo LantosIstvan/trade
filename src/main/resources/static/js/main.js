@@ -1,7 +1,5 @@
 "use strict";
 
-// Saját script-eknek kijelölt fájl
-
 document.addEventListener('DOMContentLoaded', function () {
 	// Ha nincs adat vagy nincs Chart, semmi dolgom
 	if (!window.soapRates || !Array.isArray(window.soapRates) || window.soapRates.length === 0) return;
@@ -10,8 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const labels = window.soapRates.map(r => r.date);
 	const data = window.soapRates.map(r => {
 		let v = (r.value || '').toString().trim();
-		// Kezeljük a tizedes vesszőt (pl. "372,45")
-		v = v.replace(',', '.');
+		v = v.replace(',', '.'); // Kezeljük a tizedes vesszőt (pl. "372,45")
 		const n = parseFloat(v);
 		return isNaN(n) ? null : n;
 	});

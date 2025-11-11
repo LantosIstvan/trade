@@ -2,7 +2,6 @@ package hu.nje.trade.controller;
 
 import com.oanda.v20.Context;
 import com.oanda.v20.trade.TradeCloseRequest;
-import com.oanda.v20.trade.TradeCloseResponse;
 import com.oanda.v20.trade.TradeSpecifier;
 import hu.nje.trade.Config;
 import hu.nje.trade.dto.ZarDTO;

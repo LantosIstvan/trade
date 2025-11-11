@@ -38,7 +38,6 @@ public class SoapController {
     {
         MNBArfolyamServiceSoapImpl impl = new MNBArfolyamServiceSoapImpl();
         MNBArfolyamServiceSoap service = impl.getCustomBindingMNBArfolyamServiceSoap();
-
         String mnb = service.getExchangeRates(
             soapDTO.getStartDate(),
             soapDTO.getEndDate(),
@@ -68,6 +67,7 @@ public class SoapController {
             // model.addAttribute("rawXml", mnb); // opcionális: nyers XML megjelenítéshez
         } catch (Exception e) {
             model.addAttribute("error", "XML feldolgozási hiba: " + e.getMessage());
+            e.printStackTrace();
         }
 
         String title = "SOAP menü | Eredmény";
