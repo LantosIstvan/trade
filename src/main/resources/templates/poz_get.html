@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body>
+<th:block th:fragment="content">
+
+    <section class="pt-8 py-lg-0" id="hero" style="background-color:#f5f5ff;">
+        <div class="container-xxl">
+            <div class="row align-items-center min-vh-lg-50">
+                <div class="col-lg order-lg-1 text-center">
+                    <img class="img-fluid" th:src="@{/images/illustrations/hero-nyit.png}" alt="" />
+                </div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 th:text="${heroMessage}" class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5">
+        <div class="container-xxl">
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Hiba!</h4>
+                        <p th:text="${errorMessage}"></p>
+                    </div>
+
+                    <div th:if="${!trades.isEmpty()}" class="table-responsive">
+                        <table class="table table-striped table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Instrumentum</th>
+                                    <th scope="col">Irány</th>
+                                    <th scope="col">Egység</th>
+                                    <th scope="col">Nyitóár</th>
+                                    <th scope="col">Nyitás Ideje</th>
+                                    <th scope="col" class="text-end">Nem realizált P/L</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="trade : ${trades}">
+                                    <th scope="row" th:text="${trade.id}"></th>
+                                    <td th:text="${trade.instrument}"></td>
+                                    <!-- Irány meghatározása a currentUnits előjele alapján -->
+                                    <td th:text="${trade.currentUnits.doubleValue() > 0 ? 'Long' : 'Short'}"
+                                        th:classappend="${trade.currentUnits.doubleValue() > 0 ? 'text-success' : 'text-danger'}">/td>
+                                    <td th:text="${T(java.lang.Math).abs(trade.currentUnits.doubleValue())}"></td>
+                                    <td th:text="${trade.price}"></td>
+                                    <!-- Dátum formázása a saját Utils osztályunkkal -->
+                                    <td th:text="${T(hu.nje.trade.Utils).formatTimestamp(trade.openTime)}"></td>
+                                    <!-- P/L érték színezése: zöld ha pozitív, piros ha negatív -->
+                                    <td class="text-end fw-bold"
+                                        th:text="${trade.unrealizedPL}"
+                                        th:classappend="${trade.unrealizedPL.doubleValue() >= 0 ? 'text-success' : 'text-danger'}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div th:if="${trades.isEmpty() and !errorMessage}" class="alert alert-info text-center" role="alert">
+                        Nincsenek nyitott pozíciók.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>
