@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body>
+<th:block th:fragment="content">
+
+    <section class="pt-8 py-lg-0" id="hero" style="background-color:#f5f5ff;">
+        <div class="container-xxl">
+            <div class="row align-items-center min-vh-lg-50">
+                <div class="col-lg order-lg-1 text-center">
+                    <img class="img-fluid" th:src="@{/images/illustrations/hero-nyit.png}" alt="" />
+                </div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 th:text="${heroMessage}" class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5">
+        <div class="container-xxl">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <h2 class="text-center mb-4">Deviza árfolyam lekérdezése</h2>
+                    <form action="#" th:action="@{/soap}" th:object="${param}" method="post">
+                        <div class="mb-3">
+                            <label for="instrumentSelect" class="form-label">Válaszd ki a devizát:</label>
+                            <select id="instrumentSelect" class="form-select form-select-lg" name="instruments" th:field="*{currency}">
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Kezdő dátum:</label>
+                            <input type="date" class="form-control form-control-lg" id="startDate" th:field="*{startDate}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label">Végdátum:</label>
+                            <input type="date" class="form-control form-control-lg" id="endDate" th:field="*{endDate}">
+                        </div>
+
+                        <div class="d-grid">
+                            <input type="submit" value="Küldés" class="btn btn-primary btn-lg">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>

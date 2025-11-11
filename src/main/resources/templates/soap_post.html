@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default_layout :: layout(pageTitle=${pageTitle}, content=~{:: content})}">
+<body>
+<th:block th:fragment="content">
+
+    <section class="pt-8 py-lg-0" id="hero" style="background-color:#f5f5ff;">
+        <div class="container-xxl">
+            <div class="row align-items-center min-vh-lg-50">
+                <div class="col-lg order-lg-1 text-center">
+                    <img class="img-fluid" th:src="@{/images/illustrations/hero-nyit.png}" alt="" />
+                </div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 th:text="${heroMessage}" class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5 bg-light">
+        <div class="container-xxl">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card text-center shadow-sm">
+                        <div class="card-header">
+                            <h2 class="mb-0">Deviza árfolyam listája</h2>
+                        </div>
+                        <div class="card-body p-4">
+                            <!--/* Hibaüzenet megjelenítése, ha a kontroller hibát adott át */-->
+                            <div th:if="${error}" class="alert alert-danger" role="alert">
+                                <h4 class="alert-heading">Hiba!</h4>
+                                <p class="mb-0" th:text="${error}"></p>
+                            </div>
+                            <!--/* Adatok megjelenítése, ha nincs hiba */-->
+                            <div th:unless="${error}">
+                                <!-- Rendereljük a rates listát, ha van -->
+                                <div th:if="${rates}">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Dátum</th>
+                                                    <th>Deviza</th>
+                                                    <th>Egység</th>
+                                                    <th>Árfolyam</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="r : ${rates}">
+                                                    <td th:text="${r.date}"></td>
+                                                    <td th:text="${r.curr}"></td>
+                                                    <td th:text="${r.unit}"></td>
+                                                    <td th:text="${r.value}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Chart megjelenítése -->
+                                    <div class="mt-4">
+                                        <canvas id="ratesChart" height="120"></canvas>
+                                    </div>
+
+                                    <!-- Thymeleaf -> JS adatátadás -->
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        window.soapRates = /*[[${rates}]]*/ [];
+                                        /*]]>*/
+                                    </script>
+                                </div>
+
+                                <!--/* Opcionális: nyers XML megjelenítése debughoz */-->
+                                <!--/* <div th:if="${rawXml}" class="mt-3 text-start">
+                                    <h6>Nyers XML válasz</h6>
+                                    <pre th:text="${rawXml}" style="white-space: pre-wrap; word-break: break-word;"></pre>
+                                </div> */-->
+                            </div>
+                            <a th:href="@{/soap}" class="btn btn-primary btn-lg mt-4 w-100">Új lekérdezés</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</body>
+</html>
